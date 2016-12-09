@@ -1,0 +1,67 @@
+<!doctype html>
+<html ng-app="Inventory">
+<head>
+  <title>Inventário</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/bootstrap.css">  
+  <link rel="stylesheet" href="css/application.css">
+</head>
+<body>
+  <div class="container" ng-controller="ProductsController">
+    <div class="row">
+      <div class="page-header">
+        <div class="span9">
+          <h1>Lista de produtos</h1>
+        </div>
+        <div class="span3">
+          <input type="search" ng-model="search" placeholder="Buscar...">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <table class="table table-striped products-list">
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in itens | filter:search" ng-class="{0: 'low-quantity'}[item.quantity]">            
+            <td><strong>{{ item.name }}</strong></td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.value |  currency:'R$' }}</td>
+            <td>
+              <button class="btn btn-warning btn-small" ng-click="editItem($index)">
+                <i class="icon-pencil icon-white"></i> editar
+              </button>
+              <button class="btn btn-danger btn-small" ng-click="deleteItem($index)">
+                <i class="icon-trash icon-white"></i> deletar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <form class="row form-inline" name="formProduct">
+      <input type="text" ng-model="item.name" placeholder="Produto" required>
+      <input type="number" ng-model="item.quantity" placeholder="quantity" class="input-small" required>
+      <input type="number" ng-model="item.value" placeholder="quantity" class="input-small" required>
+      <button ng-hide="edit" class="btn btn-success" ng-disabled="formProduct.$invalid" ng-click="addItem()">
+        <i class="icon-plus icon-white"></i> adicionar
+      </button>
+      <button ng-show="edit" class="btn btn-success" ng-disabled="formProduct.$invalid" ng-click="applyChanges()">
+        <i class="icon-ok icon-white"></i> salvar
+      </button>
+    </form>
+
+
+  </div>
+  
+  <script src="lib/angular.min.js"></script>
+  <script src="lib/angular-locale_pt-br.js"></script>  
+  <script src="js/app.js"></script>
+  <script src="js/productsController.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+.products-list td, .products-list th {
+	text-align: center;
+}
+.low-quantity {	
+	color: red;
+}
+.page-header {
+    padding-bottom: 50px;
+}

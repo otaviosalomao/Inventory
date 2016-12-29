@@ -11,8 +11,7 @@ app.controller("ProductsController", function($scope) {
 
     $scope.addItem = function () {
         $scope.itens.push({name: $scope.item.name, quantity: $scope.item.quantity, value: $scope.item.value});
-        $scope.item.name = $scope.item.quantity = $scope.item.value ='';
-        toastr.success("Item adicionado com sucesso.");
+        $scope.item.name = $scope.item.quantity = $scope.item.value ='';        
     };
 
     $scope.editItem = function(index){

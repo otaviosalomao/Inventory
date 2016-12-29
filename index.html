@@ -1,5 +1,11 @@
 <!doctype html>
+
+
+<!-- DECLARAÇÃO DO ESCOPO DA APLICAÇÃO -->
 <html ng-app="Inventory">
+
+
+
 <head>
   <title>Inventário</title>
   <meta charset="utf-8">
@@ -7,14 +13,25 @@
   <link rel="stylesheet" href="css/application.css">
 </head>
 <body>
+
+
+<!-- DECLARAÇÃO DO ESCOPO DO CONTROLLER -->
   <div class="container" ng-controller="ProductsController">
+
+
+
+
     <div class="row">
       <div class="page-header">
         <div class="span9">
           <h1>Escritório</h1>
         </div>
         <div class="span3">
+
+        <!-- CAMPO DE BUSCA UTILIZANDO A DIRETIVA NG-MODEL -->
           <input type="search" ng-model="search" placeholder="Buscar...">
+
+
         </div>
       </div>
     </div>
@@ -28,12 +45,30 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="item in itens | filter:search" ng-class="{0: 'low-quantity'}[item.quantity]">            
+
+
+        <!-- LAÇO UTILIZANDO A DIRETIVA NG-REPEAT -->
+        <!-- REALIZANDO FILTRO NA LISTAGEM ATRAVÉS DO METODO FILTER -->
+          <tr ng-repeat="item in itens | filter:search" ng-class="{0: 'low-quantity'}[item.quantity]">
+
+
             <td><strong>{{ item.name }}</strong></td>
             <td>{{ item.quantity }}</td>
+
+
+            <!-- FORMATAÇÃO SIMPLES COM ANGULAR -->
             <td>{{ item.value |  currency:'R$' }}</td>
+
+
+
             <td>
+
+
+              <!-- ATRIBUINDO EVENTO AO BOTAO EDITAR ATRAVÉS DA DIRETIVA NG-CLICK -->
+              <!-- UTILIZANDO A CONSTANTE $INDEX COMO PARAMETRO DO EDITAR -->
               <button class="btn btn-warning btn-small" ng-click="editItem($index)">
+
+
                 <i class="icon-pencil icon-white"></i> editar
               </button>
               <button class="btn btn-danger btn-small" ng-click="deleteItem($index)">
@@ -48,13 +83,33 @@
       <input type="text" ng-model="item.name" placeholder="Produto" required>
       <input type="number" ng-model="item.quantity" placeholder="quantity" class="input-small" required>
       <input type="number" ng-model="item.value" placeholder="quantity" class="input-small" required>
+
+
+
+      <!-- VALIDANDO/CONTROLANDO A EXIBICAO DO ADICIONAR ATRAVÉS DAS DIRETIVAS NG-HIDE e NG-DISABLE -->
       <button ng-hide="edit" class="btn btn-success" ng-disabled="formProduct.$invalid" ng-click="addItem()">
         <i class="icon-plus icon-white"></i> adicionar
       </button>
+
+
+
       <button ng-show="edit" class="btn btn-success" ng-disabled="formProduct.$invalid" ng-click="applyChanges()">
         <i class="icon-ok icon-white"></i> salvar
       </button>
-    </form>
+    </form>  
+
+    <hr/>
+
+    <div style="display:none">
+      <!-- Exemplo Slide   -->    
+      <span>{{message}}</span>
+      <button class="btn btn-success" ng-click="message = 'Hello World!'"> Button </button>    
+
+
+      <!-- EXIBIÇÂO DO ARRAY PRINCIPAL   -->
+      {{itens}}
+    <div>
+
   </div>
   
   <script src="lib/angular.min.js"></script>
